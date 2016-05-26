@@ -1,7 +1,7 @@
 #include"sorryPlayers.h"
 using namespace std;
 
-pNode::pNode():next(NULL)
+pNode::pNode():next(NULL),cardType(0)
 {
 }
 
@@ -22,9 +22,9 @@ void pNode::displaypNode()
 
 }
 
-Players::Players(int size)
+Players::Players(int tableSize)
 {
-    size = 1;
+    int size = tableSize;
     head = new pNode * [size];
     for(int i = 0; i < size; i++)
     {
@@ -38,35 +38,31 @@ Players::~Players()
 {
 }
 
-void Players::determine(int player, int cardType)
-{
-    insert(head[player], cardType);
-}
 
-
-void Players::insert(pNode * head, int value)
+void Players::insert(int player, int value)
 {
-    cout << "INSERT" << endl;
     pNode * temp = new pNode(value);
+    int element = player;
+    temp->getNext() = head[element];
+    head[element] = temp;
+
+
+
 
 }
 
 void Players::displayAll()
 {
-    for(int i = 0; i < 1; i++)
+    pNode * temp;
+    for(int i = 0; i < 2; i++)
     {
-        cout << "HELLO " << endl;
+        temp = head[i];
+        while( temp!=NULL)
+        {
+            temp->displaypNode();
+            temp=temp->getNext();
+        }
 
-        displayAll(head[i]);
     }
-
 }
 
-void Players::displayAll(pNode * head)
-{
-    if(!head)
-        return;
-    head->displaypNode();
-    displayAll(head->getNext());
-
-}

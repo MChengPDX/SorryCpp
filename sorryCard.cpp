@@ -61,18 +61,18 @@ Bnode *& Bnode::get_prev()
     return prev;
 }
 
-//Maze Class Implementation
+//Card Class Implementation
 
 
-//Maze Constructor
-Maze::Maze()
+//Card Constructor
+Card::Card()
 {
     root = NULL;
 }
 
 
 //destructor
-Maze::~Maze()
+Card::~Card()
 {
     remove_all();
 
@@ -80,14 +80,14 @@ Maze::~Maze()
 
 
 //remove all wrapper
-void Maze::remove_all()
+void Card::remove_all()
 {
     remove_all(root);
 }
 
 
 //remove all 
-void Maze::remove_all(Bnode * root)
+void Card::remove_all(Bnode * root)
 {
     if(!root)
         return ;
@@ -99,18 +99,18 @@ void Maze::remove_all(Bnode * root)
 
 }
 
-void Maze::insert(int data)
+void Card::insert(int data)
 {
     root = insert(data, root);
 }
 
-int Maze::height(Bnode * root)
+int Card::height(Bnode * root)
 {
      root == NULL ? -1 : root->get_height();
 }
 
 //return the max of x(get_left()) and y(get_right())
-int Maze::max(int x, int y)
+int Card::max(int x, int y)
 {
     return x > y ? x : y;
 }
@@ -119,7 +119,7 @@ int Maze::max(int x, int y)
 //insertion, checks for height each time at insertion
 // if it is 2, rotate
 // else just insert
-Bnode * Maze:: insert(int data, Bnode * root)
+Bnode * Card:: insert(int data, Bnode * root)
 {
     if(!root)
     {
@@ -152,7 +152,7 @@ Bnode * Maze:: insert(int data, Bnode * root)
  }
 
 //left rotate
-Bnode * Maze::RLC(Bnode * root)
+Bnode * Card::RLC(Bnode * root)
 {
     Bnode * temp = root->get_left();
     root->get_left() = temp -> get_right();
@@ -168,7 +168,7 @@ Bnode * Maze::RLC(Bnode * root)
 
 
 //right rotate 
-Bnode * Maze::RRC(Bnode * root)
+Bnode * Card::RRC(Bnode * root)
 {
     int v1 = 0;
     int v2 = 0;
@@ -184,7 +184,7 @@ Bnode * Maze::RRC(Bnode * root)
 
 
 //double rotate a node with left child
-Bnode * Maze::DWLC(Bnode * root)
+Bnode * Card::DWLC(Bnode * root)
 {
     root->get_left() = RLC(root->get_left());
     return RRC(root);
@@ -192,7 +192,7 @@ Bnode * Maze::DWLC(Bnode * root)
 
 
 //double rotate a node with right child
-Bnode * Maze::DWRC(Bnode * root)
+Bnode * Card::DWRC(Bnode * root)
 {
     root->get_right() = RLC(root->get_right());
     return RRC(root);
@@ -200,7 +200,7 @@ Bnode * Maze::DWRC(Bnode * root)
 
 
 //count the number of nodes
-int Maze::countBnodes(Bnode * root)
+int Card::countBnodes(Bnode * root)
 {
     if(!root)
         return 0;
@@ -215,7 +215,7 @@ int Maze::countBnodes(Bnode * root)
 
 
 ///display all wrapper
-void Maze::display_all()
+void Card::display_all()
 {
     cout << "Displaying the whole tree " << endl;
     display_all(root);
@@ -223,7 +223,7 @@ void Maze::display_all()
 
 
 //displaying all items in the balance search tree
-void Maze::display_all(Bnode * root)
+void Card::display_all(Bnode * root)
 {
     if(!root)
     {
@@ -236,7 +236,7 @@ void Maze::display_all(Bnode * root)
 
 
 //test functiuon to see if all nodes were balance properly
-void Maze::test()
+void Card::test()
 {
     cout << "Display all get_left() " << endl;
     display_all(root->get_left());
@@ -247,7 +247,7 @@ void Maze::test()
 
 
 //moving back
-Bnode * Maze::go_back(Bnode * current)
+Bnode * Card::go_back(Bnode * current)
 {
     if(current->get_prev() == NULL)
     {
@@ -263,7 +263,7 @@ Bnode * Maze::go_back(Bnode * current)
 
 
 //moving the user right
-Bnode * Maze::advance_r(Bnode * current)
+Bnode * Card::advance_r(Bnode * current)
 {
     if(current->get_right() == NULL)
     {
@@ -278,7 +278,7 @@ Bnode * Maze::advance_r(Bnode * current)
 
 
 //moving the user left
-Bnode * Maze::advance_l(Bnode * current)
+Bnode * Card::advance_l(Bnode * current)
 {
     if(current->get_left() == NULL)
     {
@@ -294,7 +294,7 @@ Bnode * Maze::advance_l(Bnode * current)
 
 //give user the option to move
 //while the user has not beat the game, he/she cant not exit out of the application
-void Maze::move()
+void Card::move()
 {
     Bnode * current = root;
     int value = 0;
@@ -322,7 +322,7 @@ void Maze::move()
 
 
 //captures user input and deterine where to move the pointers
-Bnode * Maze::advance(int value, Bnode * current)
+Bnode * Card::advance(int value, Bnode * current)
 {
     if(value == 1)
     {
@@ -353,7 +353,7 @@ Bnode * Maze::advance(int value, Bnode * current)
 //set_previous wrapper
 //sets the root to null, then pass in root left and root
 //right to the other set_previous function
-void Maze::set_previous()
+void Card::set_previous()
 {
     root->get_prev() = NULL;
     set_previous(root->get_left(), root);
@@ -363,7 +363,7 @@ void Maze::set_previous()
 //makes two ptr, one for the following ptr and one to
 //hold the previous. as it recur, it will
 //attach the nodes
-void Maze::set_previous(Bnode * ptr, Bnode *p_ptr)
+void Card::set_previous(Bnode * ptr, Bnode *p_ptr)
 {
     if(!ptr)
         return;

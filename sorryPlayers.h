@@ -28,9 +28,7 @@ class Players
         void removeAll(pNode *& head);
         void displayAll();
         void displayAll(pNode * head);
-        void determine(int, int);
-        void insert(pNode * head, int value);
-
+        void insert(int player, int value);
 
 
 };

@@ -1,12 +1,3 @@
-/*
- * Michael Cheng
- * CS 202 Program 3
- * Winter 2016
- *
- * node.h
- *
- */
-
 
 
 class Bnode
@@ -35,13 +26,13 @@ class Bnode
 };
 
 
-class Maze
+class Card
 {
     private:
         Bnode * root;
     public:
-        Maze();
-        ~Maze();
+        Card();
+        ~Card();
         void remove_all();
         void remove_all(Bnode * root);
         void display_all();
@@ -80,8 +71,8 @@ class Maze
         Bnode * advance(int value, Bnode * current);
 
         //operator overloading to move
-        //Bnode & Maze operator >> (Bnode & to_move); //moving right
-        //Bnode & Maze operator << (Bnode & to_move); //move left
+        //Bnode & Card operator >> (Bnode & to_move); //moving right
+        //Bnode & Card operator << (Bnode & to_move); //move left
 
 
         //setting previous pointers
