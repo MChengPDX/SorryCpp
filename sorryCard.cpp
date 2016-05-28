@@ -390,3 +390,5 @@ void Card::set_previous(Bnode * ptr, Bnode *p_ptr)
 
 }
 
+    
+

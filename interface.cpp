@@ -13,7 +13,7 @@ int Interface::diceRoll()
 
 }
 
-void Interface::setupBoard()
+Board *&Interface::setupBoard()
 {
     
     boardObj = new Board;
@@ -30,9 +30,45 @@ void Interface::setupBoard()
         if(a == 2)
             boardObj -> insert(a, test);
         
-        cout << a << endl;
     }
-    boardObj->displayAll();
-    return; 
+    return boardObj;
+
+}
+
+Card &Interface::setupCard()
+{
+    StringMC card1 = "card1";
+    StringMC card2 = "card2";
+    StringMC card3 = "card3";
+
+    fstream txt("card.txt");
+    int a;
+    while(txt >> a)
+    {
+        cardObj.insert(a);
+    }
+    return cardObj;
+}
+
+
+void Interface::gameSetup()
+{
+    Card card;
+    card = setupCard();
+    /*
+    Board * game = new Board;
+    Card card;
+    card = setupCard();
+    game = setupBoard();
+    Node * p1;
+    Node * p2;
+    p1 = game->setPlayers(p1);
+    p2 = game->setPlayers(p2);
+    gamePlay(p1, p2, game, card);
+    */
+}
+
+void Interface::gamePlay(Node * p1, Node * p2, Board * boardObj, Card cardObj)
+{
 
 }

@@ -113,6 +113,32 @@ Board::~Board()
     removeAll();
 }
 
+
+Node *& Board::setPlayers(Node *& temp)
+{
+    temp = head;
+    temp->displayNode();
+    return temp;
+
+}
+
+Node *&Board::movement(Node * &current, int player, int move)
+{
+    cout << "This is current " << endl;
+    current->displayNode();
+    for(int i = 0; i < move; i++)
+    {
+        if(current -> getNext() != NULL)
+        {
+            current = current->getNext();
+        }
+    }
+    current->displayNode();
+
+    return current;
+
+}
+
 void Board::insert(int data, char * name)
 {
     Node * temp = new Node(data, name);

@@ -5,17 +5,17 @@ using std::cin;
 
 
 //initializing static class member
-int String::num_strings = 0;
+int StringMC::num_strings = 0;
 
 //static method
-int String::HowMany()
+int StringMC::HowMany()
 {
     return num_strings;
 
 }
 
 //class methods
-String::String(const char * s)
+StringMC::StringMC(const char * s)
 {
     len = std::strlen(s); //set size
     str = new char[len + 1]; //allot storage
@@ -24,7 +24,7 @@ String::String(const char * s)
 
 }
 
-String::String(const String & from)
+StringMC::StringMC(const StringMC & from)
 {
     len = std::strlen(from.str);
     str = new char [len + 1];
@@ -33,7 +33,7 @@ String::String(const String & from)
 
 }
 
-String::String()
+StringMC::StringMC()
 {
     len = 4;
     str = new char[1];
@@ -43,7 +43,7 @@ String::String()
 
 }
 
-String::~String()
+StringMC::~StringMC()
 {
     --num_strings;
     delete [] str;
@@ -53,7 +53,7 @@ String::~String()
 //overloaded operator methods
 
 //assigning a string to a string
-String & String:: operator = (const String & st)
+StringMC & StringMC:: operator = (const StringMC & st)
 {
     if(this == & st)
         return *this;
@@ -66,7 +66,7 @@ String & String:: operator = (const String & st)
 }
 
 //assign a c string to a string
-String & String :: operator = (const char * s)
+StringMC & StringMC :: operator = (const char * s)
 {
     delete [] str;
     len = std::strlen(s);
@@ -77,47 +77,47 @@ String & String :: operator = (const char * s)
 }
 
 //read-write char access from non const stringn
-char & String:: operator[](int i)
+char & StringMC:: operator[](int i)
 {
     return str[i];
 
 }
 
 //read only char access for const string
-const char & String::operator [] (int i ) const
+const char & StringMC::operator [] (int i ) const
 {
     return str[i];
 }
 
 //overloaded operator friends
-bool operator < (const String & st1, const String & st2)
+bool operator < (const StringMC & st1, const StringMC & st2)
 {
     return (std::strcmp(st1.str, st2.str) < 0 );
 
 }
 
-bool operator > (const String & st1, const String & st2)
+bool operator > (const StringMC & st1, const StringMC & st2)
 {
     return st2 < st1;
 
 }
 
-bool operator == (const String & st1, const String & st2)
+bool operator == (const StringMC & st1, const StringMC & st2)
 {
     return (std::strcmp(st1.str, st2.str) == 0);
 
 }
 
-ostream & operator << (ostream & os, const String & s)
+ostream & operator << (ostream & os, const StringMC & s)
 {
     os << s.str;
     return os;
 }
 
-istream & operator >> (istream & is, String & st)
+istream & operator >> (istream & is, StringMC & st)
 {
-    char temp[String::CINLIM];
-    is.get(temp, String::CINLIM);
+    char temp[StringMC::CINLIM];
+    is.get(temp, StringMC::CINLIM);
     if (is)
         st = temp;
     while( is && is.get () != '\n')

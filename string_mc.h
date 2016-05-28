@@ -14,7 +14,7 @@ using namespace std;
  *
  */
 
-class String
+class StringMC
 {
     private:
         char * str; //pointer to a string
@@ -22,22 +22,22 @@ class String
         static int num_strings; //number of objects
         static const int CINLIM = 100; // cin input limit
     public:
-        String(const char * s); //constructor
-        String(); //default
-        String(const String &); //copy constructor
-        ~String();
+        StringMC(const char * s); //constructor
+        StringMC(); //default
+        StringMC(const StringMC &); //copy constructor
+        ~StringMC();
         int length () const { return len;}
         //overloaded functions
-        String & operator = (const String &);
-        String & operator = (const char *);
+        StringMC & operator = (const StringMC &);
+        StringMC & operator = (const char *);
         char & operator [] (int i);
         const char & operator [] (int i) const;
         //Friends
-        friend bool operator < (const String & s, const String & s2);
-        friend bool operator > (const String & s, const String & s2);
-        friend bool operator == (const String & s, const String & s2);
-        friend ostream & operator << (ostream & os, const String & s);
-        friend istream & operator >> (istream & is, String & s);
+        friend bool operator < (const StringMC & s, const StringMC & s2);
+        friend bool operator > (const StringMC & s, const StringMC & s2);
+        friend bool operator == (const StringMC & s, const StringMC & s2);
+        friend ostream & operator << (ostream & os, const StringMC & s);
+        friend istream & operator >> (istream & is, StringMC & s);
 
         //static function
         static int HowMany();

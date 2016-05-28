@@ -1,5 +1,5 @@
-
-
+#include<iostream>
+#include"string_mc.h"
 class Bnode
 {
     private:
@@ -78,5 +78,7 @@ class Card
         //setting previous pointers
         void set_previous(Bnode * ptr, Bnode * ptr2);
         void set_previous();
+
+
 
 };

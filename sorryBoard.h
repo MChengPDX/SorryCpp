@@ -67,6 +67,8 @@ class Board
         void removeAll();
         void displayAll();
         void displayAll(Node * head);
+        Node *& movement(Node *&current,int player, int move);
+        Node*&setPlayers(Node *& temp);
         
 
 };

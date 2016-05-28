@@ -3,7 +3,6 @@ using namespace std;
 
 int main()
 {
-    Interface Game;
-    Game.setupBoard();
-
+    Interface g;
+    g.gameSetup();
 }

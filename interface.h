@@ -5,17 +5,19 @@
 #include"sorryBoard.h"
 #include"sorryPlayers.h"
 #include"sorryCard.h"
-#include"string_mc.h"
 class Interface
 {
     private:
         Board * boardObj;
+        Card cardObj;
 
     public:
         void validationFunction();
-        void setupBoard();
-        void setupCard();
-        void setupPlayer();
+        Board *& setupBoard();
+        Card& setupCard();
         int diceRoll();
+
+        void gameSetup();
+        void gamePlay(Node * p1, Node * p2, Board * boardObj, Card obj);
 
 };
