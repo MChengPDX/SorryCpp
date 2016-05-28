@@ -36,6 +36,7 @@ Players::Players(int tableSize)
 
 Players::~Players()
 {
+    removeAll();
 }
 
 
@@ -66,3 +67,22 @@ void Players::displayAll()
     }
 }
 
+void Players::removeAll()
+{
+    for(int i = 0; i < 2; i++ )
+    {
+        removeAll(head[i]);
+    }
+    delete head;
+
+}
+
+void Players::removeAll(pNode *& head)
+{
+    if(!head)
+        return;
+    pNode * temp = head;
+    head = head->getNext();
+    delete temp;
+    removeAll(head->getNext());
+}
