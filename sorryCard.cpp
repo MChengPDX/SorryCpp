@@ -7,8 +7,12 @@ using namespace std;
 //Bnode Class Implementation
 
 //Bnode constructor
-Bnode::Bnode(int n)
+Bnode::Bnode(int n, char * c)
 {
+
+    cardName = new char [(strlen(c)+1)];
+    strcpy(cardName, c);
+
     height = 0;
     data = n;
     get_left() = NULL;
@@ -20,8 +24,9 @@ Bnode::Bnode(int n)
 //Bnode destructor
 Bnode::~Bnode()
 {
-
-
+    if(cardName)
+        delete [] cardName;
+    data = 0;
 }
 
 int Bnode::set_height(int value)
@@ -31,19 +36,46 @@ int Bnode::set_height(int value)
 
 int Bnode::set_data(int value)
 {
-    data = value;
+    if(data)
+    {
+        data = value;
+        return 1;
+    }
+    else return 0;
+}
+
+void Bnode::set_cardName(char * c)
+{
+    if(c)
+    {
+        cardName = new char [(strlen(c)+1)];
+        strcpy(cardName, c);
+
+        return;
+    }
+    else
+        return;
+
+
 }
 
 
 int Bnode::get_data()
 {
-    return data;
+    if(data) return data;
+    else return 0;
 }
 
 int Bnode::get_height()
 {
 
     return height; 
+}
+
+char * Bnode::get_cardName()
+{
+    if(cardName)
+        return cardName;
 }
 
 Bnode *& Bnode::get_left()
@@ -74,7 +106,7 @@ Card::Card()
 //destructor
 Card::~Card()
 {
-    remove_all();
+   // remove_all();
 
 }
 
@@ -91,17 +123,17 @@ void Card::remove_all(Bnode * root)
 {
     if(!root)
         return ;
-    if(root->get_left() != NULL)
+    //if(root->get_left() != NULL)
         remove_all(root->get_left());
-    if(root->get_right() != NULL)
+    //if(root->get_right() != NULL)
         remove_all(root->get_right());
     delete root;
 
 }
 
-void Card::insert(int data)
+void Card::insert(int data, char * c)
 {
-    root = insert(data, root);
+    root = insert(data, c, root);
 }
 
 int Card::height(Bnode * root)
@@ -119,15 +151,15 @@ int Card::max(int x, int y)
 //insertion, checks for height each time at insertion
 // if it is 2, rotate
 // else just insert
-Bnode * Card:: insert(int data, Bnode * root)
+Bnode * Card:: insert(int data, char * c,  Bnode * root)
 {
     if(!root)
     {
-        root = new Bnode(data);
+        root = new Bnode(data,c);
     }
     else if(data < root->get_data())
     {
-        root->get_left() = insert(data, root->get_left());
+        root->get_left() = insert(data,c, root->get_left());
         if(height(root->get_left())-height(root->get_right())==2)
             if(data < root->get_left()->get_data())
                 root = RLC(root);
@@ -137,7 +169,7 @@ Bnode * Card:: insert(int data, Bnode * root)
     }
     else if(data >= root->get_data())
     {
-        root->get_right() = insert(data, root->get_right());
+        root->get_right() = insert(data,c, root->get_right());
         if(height(root->get_right())-height(root->get_left())==2)
             if(data > root->get_right()->get_data())
                 root = RRC(root);
@@ -217,7 +249,6 @@ int Card::countBnodes(Bnode * root)
 ///display all wrapper
 void Card::display_all()
 {
-    cout << "Displaying the whole tree " << endl;
     display_all(root);
 }
 
@@ -229,7 +260,7 @@ void Card::display_all(Bnode * root)
     {
         return;
     }
-    cout << root->get_data() << endl;
+    cout << "Card Type : " << root->get_data() <<" Card Name : " << root->get_cardName() << endl;
     display_all(root->get_left());
     display_all(root->get_right());
 }

@@ -36,6 +36,19 @@ Players::Players(int tableSize)
 
 Players::~Players()
 {
+    /*pNode * temp;
+    for(int i = 0; i <3; i++)
+    {
+        temp = head[i];
+        while(temp->getNext() != NULL)
+        {
+            pNode * current = temp->getNext();
+            delete temp;
+            temp = current;
+
+        }
+    }
+    */
     removeAll();
 }
 
@@ -46,7 +59,7 @@ void Players::insert(int player, int value)
     int element = player;
     temp->getNext() = head[element];
     head[element] = temp;
-
+    return;
 
 
 
@@ -54,9 +67,16 @@ void Players::insert(int player, int value)
 
 void Players::displayAll()
 {
+
     pNode * temp;
     for(int i = 0; i < 2; i++)
     {
+        if(head[i] == NULL)
+        {
+            cout << "No players has been loaded" << endl;
+            return;
+        }
+        cout << "Displaying all cards for player : " << i << endl;
         temp = head[i];
         while( temp!=NULL)
         {
@@ -69,11 +89,14 @@ void Players::displayAll()
 
 void Players::removeAll()
 {
+
     for(int i = 0; i < 2; i++ )
     {
+        if(head[i] == NULL)
+            return;
         removeAll(head[i]);
     }
-    delete head;
+    delete [] head;
 
 }
 
@@ -84,5 +107,5 @@ void Players::removeAll(pNode *& head)
     pNode * temp = head;
     head = head->getNext();
     delete temp;
-    removeAll(head->getNext());
+    removeAll(head);
 }

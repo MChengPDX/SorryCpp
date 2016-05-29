@@ -10,14 +10,17 @@ class Interface
     private:
         Board * boardObj;
         Card cardObj;
-
     public:
         void validationFunction();
+
+        Players *& setupPlayer();
         Board *& setupBoard();
         Card& setupCard();
+        
         int diceRoll();
 
         void gameSetup();
         void gamePlay(Node * p1, Node * p2, Board * boardObj, Card obj);
 
 };
+

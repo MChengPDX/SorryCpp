@@ -44,6 +44,7 @@ class Node
         Node *& getNext();
         Node *& getPrev();
         void setNext(Node *);
+        Type *& returnType();
         void displayNode();
         void setType(int, char *);
         char *getInfo();
@@ -67,8 +68,11 @@ class Board
         void removeAll();
         void displayAll();
         void displayAll(Node * head);
+        void searchFor(char * c);
+        void searchFor(Node * head, char * value);
         Node *& movement(Node *&current,int player, int move);
         Node*&setPlayers(Node *& temp);
+        char * getInfo(Node * head);
         
 
 };

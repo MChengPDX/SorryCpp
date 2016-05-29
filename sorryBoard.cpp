@@ -28,10 +28,14 @@ Type::Type(char * name)
     strcpy(typeName, name);
 }
 
+char * Type::getName()
+{
+    return typeName;
+}
+
 void Type::display()
 {
     cout << typeName << endl;
-    cout << endl;
 
 }
 
@@ -122,6 +126,35 @@ Node *& Board::setPlayers(Node *& temp)
 
 }
 
+//---------------Search---------------
+
+void Board::searchFor(char *value)
+{
+    searchFor(head, value);
+}
+
+void Board::searchFor(Node * head, char * value)
+{
+    if(!head)
+        return;
+    if((strcmp(head->getInfo(), value) == 0))
+    {
+        head->displayNode();
+        return searchFor(head->getNext(), value);
+    }
+    else
+        return searchFor(head->getNext(), value);
+}
+
+char * Node::getInfo()
+{
+    return data->getName();
+
+}
+
+
+//---------------Search/end-----------
+
 Node *&Board::movement(Node * &current, int player, int move)
 {
     cout << "This is current " << endl;
@@ -185,7 +218,10 @@ void Board::displayAll()
 void Board::displayAll(Node * head)
 {
     if(!head)
+    {
+        cout << "Board is empty" << endl;
         return;
+    }
     head->displayNode();
     displayAll(head->getNext());
 }

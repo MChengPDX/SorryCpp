@@ -3,19 +3,21 @@
 class Bnode
 {
     private:
+        char * cardName;//
         int height, data;
         Bnode * left;
         Bnode * right;
         Bnode * prev;
         
     public:
-        Bnode(int n);
+        Bnode(int n, char *c);//
         ~Bnode();
+        char  * get_cardName();//
         int get_data();
         int get_height();
         
         int display_data();
-
+        void set_cardName(char * card);//
         int set_data(int value);
         int set_height(int value);
 
@@ -37,10 +39,10 @@ class Card
         void remove_all(Bnode * root);
         void display_all();
         void display_all(Bnode * root);
-        void insert(int data);
+        void insert(int data, char * c);//
         int height(Bnode * root);
         int max (int a, int b);
-        Bnode * insert(int data, Bnode * root);
+        Bnode * insert(int data, char * c, Bnode * root);
         // Rotate tree node with left child 
         Bnode * RLC(Bnode * root);
         // Rotate with right child
