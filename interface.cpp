@@ -127,16 +127,18 @@ void Interface::gamePlay(Node * p1, Node * p2, Board * boardObj, Card cardObj)
     bool done = false;
     while(!done)
     {
-        cout << current << endl;
         if(current % 2 == 0)
         {
             cout << "Player One Turn" << endl;
+            cout << endl;
             turnMenu(p1, 0);
             current++;
         }
         else
         { 
             cout << "Player Two Turn" << endl;
+            cout << endl;
+            turnMenu(p2, 1);
             current++;
         }
         char play;
@@ -152,8 +154,38 @@ void Interface::gamePlay(Node * p1, Node * p2, Board * boardObj, Card cardObj)
 
 void Interface::turnMenu(Node *& temp, int player)   
 {
-    cout << "Current turn for player : " << player << endl;
-    cout << "Player " << player << " is currently at ";
+    char option;
+
+    int dices = 0;
+    cout << "Current position on the board is : " << endl;
     temp->displayNode();
+    bool done = false;
+    while(!done)
+    {
+        cout << "A. Roll the dice to move on the board" << endl;
+        cout << "B. Display your current possesions " << endl;
+        cout << "C. Give up " << endl;
+        cin.clear();
+        option = cin.get();
+        cin.ignore(256, '\n');
+        switch(toupper(option))
+        {
+            case 'A':
+                dices = diceRoll();
+                cout << "You rolled a " << dices << endl;
+                cout << "You will be now moved " << dices << " spaces " << endl;
+                break;
+            case 'B':
+                break;
+            case 'C':
+                cout << "You have given up " << endl;
+                done = true;
+                break;
+            default:
+                cout << "Not a valid option " << endl;
+                break;
+        }
+
+    }
 
 }
