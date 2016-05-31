@@ -18,9 +18,10 @@ class Interface
         Card& setupCard();
         
         int diceRoll();
-
+        void setPlayerOnBoard();
         void gameSetup();
         void gamePlay(Node * p1, Node * p2, Board * boardObj, Card obj);
+        void turnMenu(Node *& temp, int player);
 
 };
 

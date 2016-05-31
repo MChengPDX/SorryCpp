@@ -60,11 +60,8 @@ int Interface::diceRoll()
 
 }
 
-Players *&Interface::setupPlayer()
-{
 
 
-}
 
 Board *&Interface::setupBoard()
 {
@@ -113,24 +110,50 @@ Card &Interface::setupCard()
 
 void Interface::gameSetup()
 {
-    Card card;
-    card = setupCard();
-    card.display_all();
-    card.test();
-    /*
-    Board * game = new Board;
-    Card card;
-    card = setupCard();
-    game = setupBoard();
+    boardObj = new Board;
+    cardObj = setupCard();
+    boardObj = setupBoard();
     Node * p1;
     Node * p2;
-    p1 = game->setPlayers(p1);
-    p2 = game->setPlayers(p2);
-    gamePlay(p1, p2, game, card);
-    */
+    p1 = boardObj->setPlayers(p1);
+    p2 = boardObj->setPlayers(p2);
+    gamePlay(p1, p2, boardObj, cardObj);
+    
 }
 
 void Interface::gamePlay(Node * p1, Node * p2, Board * boardObj, Card cardObj)
 {
+    int current = 2;
+    bool done = false;
+    while(!done)
+    {
+        cout << current << endl;
+        if(current % 2 == 0)
+        {
+            cout << "Player One Turn" << endl;
+            turnMenu(p1, 0);
+            current++;
+        }
+        else
+        { 
+            cout << "Player Two Turn" << endl;
+            current++;
+        }
+        char play;
+        cout << "Keep playing? (y/n)" << endl;
+        cin >> play;
+        if(play == 'n' || play == 'N')
+        {
+            done = true;
+        }
+    }
+
+}
+
+void Interface::turnMenu(Node *& temp, int player)   
+{
+    cout << "Current turn for player : " << player << endl;
+    cout << "Player " << player << " is currently at ";
+    temp->displayNode();
 
 }
