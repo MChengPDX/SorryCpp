@@ -29,6 +29,6 @@ class Players
         void displayAll();
         void displayAll(pNode * head);
         void insert(int player, int value);
-
+        void displayPlayer(int player);
 
 };

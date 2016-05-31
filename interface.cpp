@@ -40,10 +40,12 @@ void Interface::validationFunction()
     play.insert(1, 2);
     play.insert(1, 1);
     cout << "Displaying players and their cards. " << endl << endl;
-    play.displayAll();
+    play.displayAll(); 
+    cout << "Seaerching for player 2 and displaying all items that it has " << endl;
+    play.displayPlayer(1);
     cout << "Displaying after removing everything " << endl;
     play.removeAll();
-    //play.displayAll();
+    play.displayAll();
 
 }
 

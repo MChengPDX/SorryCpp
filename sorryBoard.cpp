@@ -219,7 +219,6 @@ void Board::displayAll(Node * head)
 {
     if(!head)
     {
-        cout << "Board is empty" << endl;
         return;
     }
     head->displayNode();
@@ -256,7 +255,6 @@ Safe::Safe(char * name)
 void Safe::display()
 {
     cout << "Board Type : Safe" << endl;
-    cout << endl;
 }
 
 Type * Safe::copy()
@@ -286,7 +284,6 @@ Chance::Chance(char * name)
 void Chance::display()
 {
     cout << "Board Type : Chance " << endl;
-    cout << endl;
 }
 
 Type * Chance::copy()
@@ -314,7 +311,6 @@ Death::Death(char * name)
 void Death::display()
 {
     cout << "Board Type : Death "  << endl;
-    cout << endl;
 }
 
 

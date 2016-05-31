@@ -50,6 +50,7 @@ Players::~Players()
     }
     */
     removeAll();
+    delete [] head;
 }
 
 
@@ -87,6 +88,21 @@ void Players::displayAll()
     }
 }
 
+void Players::displayPlayer(int player)
+{
+    if(player >=2)
+    {
+        cout << "Can't find player" << endl;
+        return;
+    }
+    pNode * temp = head[player];
+    while(temp!=NULL)
+    {
+        temp->displaypNode();
+        temp = temp->getNext();
+    }
+}
+
 void Players::removeAll()
 {
 
@@ -96,7 +112,6 @@ void Players::removeAll()
             return;
         removeAll(head[i]);
     }
-    delete [] head;
 
 }
 
