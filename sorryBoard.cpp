@@ -128,7 +128,6 @@ Node *& Board::setPlayers(Node *& temp)
 
 Node *&Board::movement(Node * &current, int player, int move)
 {
-    cout << "This is current " << endl;
     for(int i = 0; i < move; i++)
     {
         if(current -> getNext() != NULL)
@@ -136,7 +135,6 @@ Node *&Board::movement(Node * &current, int player, int move)
             current = current->getNext();
         }
     }
-
     return current;
 
 }

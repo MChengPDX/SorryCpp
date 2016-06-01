@@ -90,7 +90,7 @@ void Players::displayAll()
 
 void Players::displayPlayer(int player)
 {
-    if(player >=2)
+    if(player >=1)
     {
         cout << "Can't find player" << endl;
         return;
@@ -106,10 +106,11 @@ void Players::displayPlayer(int player)
 void Players::removeAll()
 {
 
-    for(int i = 0; i < 2; i++ )
+    for(int i = 0; i < 1; i++ )
     {
         if(head[i] == NULL)
             return;
+        else
         removeAll(head[i]);
     }
 

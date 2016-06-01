@@ -60,6 +60,10 @@ int Interface::diceRoll()
 
 }
 
+Players *&Interface:: setupPlayer()
+{
+
+}
 
 
 
@@ -123,6 +127,9 @@ void Interface::gameSetup()
 
 void Interface::gamePlay(Node * p1, Node * p2, Board * boardObj, Card cardObj)
 {
+    Players play(1);
+    play.insert(0, 1);
+    play.insert(0, 4);
     int current = 2;
     bool done = false;
     while(!done)
@@ -131,14 +138,13 @@ void Interface::gamePlay(Node * p1, Node * p2, Board * boardObj, Card cardObj)
         {
             cout << "Player One Turn" << endl;
             cout << endl;
-            turnMenu(p1, 0);
+            turnMenu(p1, 0, play);
             current++;
         }
         else
         { 
             cout << "Player Two Turn" << endl;
             cout << endl;
-            turnMenu(p2, 1);
             current++;
         }
         char play;
@@ -152,8 +158,9 @@ void Interface::gamePlay(Node * p1, Node * p2, Board * boardObj, Card cardObj)
 
 }
 
-void Interface::turnMenu(Node *& temp, int player)   
+void Interface::turnMenu(Node *& temp, int player, Players & play)   
 {
+    play.displayPlayer(0);
     char option;
 
     int dices = 0;
@@ -174,8 +181,20 @@ void Interface::turnMenu(Node *& temp, int player)
                 dices = diceRoll();
                 cout << "You rolled a " << dices << endl;
                 cout << "You will be now moved " << dices << " spaces " << endl;
+                temp = boardObj->movement(temp, 0, dices);
+                
+                cout << "You are now at " << endl;
+                temp->displayNode();
+                if(strcmp(temp->getInfo(),"Chance")==0)
+                {
+                    cout << "You landed on Chance, time to draw a card" << endl;
+                    
+                }
+                done = true;
                 break;
             case 'B':
+                cout<< "Here are all things in your possesion " << endl;
+                play.displayPlayer(0);
                 break;
             case 'C':
                 cout << "You have given up " << endl;

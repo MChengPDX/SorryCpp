@@ -9,7 +9,7 @@ class Interface
 {
     private:
         Board * boardObj;
-        Card cardObj;
+        Card cardObj;;
     public:
         void validationFunction();
 
@@ -21,7 +21,7 @@ class Interface
         void setPlayerOnBoard();
         void gameSetup();
         void gamePlay(Node * p1, Node * p2, Board * boardObj, Card obj);
-        void turnMenu(Node *& temp, int player);
+        void turnMenu(Node *& temp, int player, Players & play);
 
 };
 
