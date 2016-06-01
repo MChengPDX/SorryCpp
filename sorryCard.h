@@ -65,7 +65,9 @@ class Card
         void inorder(Bnode * root);
         void preorder(Bnode * root);
         void postorder(Bnode * root);
-      
+
+        char * getCard(Bnode *& temp);
+        //Legacy Functions
         Bnode * go_back(Bnode * root);
         Bnode * advance_l(Bnode * root);
         Bnode * advance_r(Bnode * root);

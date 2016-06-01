@@ -421,5 +421,13 @@ void Card::set_previous(Bnode * ptr, Bnode *p_ptr)
 
 }
 
+
+
+char * Card::getCard(Bnode *& temp)
+{
+    temp = root;
+    return temp->get_cardName();
+
+}
     
 

@@ -9,19 +9,17 @@ class Interface
 {
     private:
         Board * boardObj;
-        Card cardObj;;
+        Card cardObj;
     public:
         void validationFunction();
 
-        Players *& setupPlayer();
         Board *& setupBoard();
-        Card& setupCard();
-        
+        Card &setupCard();     
         int diceRoll();
         void setPlayerOnBoard();
         void gameSetup();
         void gamePlay(Node * p1, Node * p2, Board * boardObj, Card obj);
-        void turnMenu(Node *& temp, int player, Players & play);
+        void turnMenu(Node *& temp, int player, Players & play, Card & cardObj);
 
 };
 

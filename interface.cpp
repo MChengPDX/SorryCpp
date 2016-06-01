@@ -1,6 +1,6 @@
 #include<time.h>
 #include"interface.h"
- using namespace std; 
+using namespace std; 
 
 void Interface::validationFunction()
 {
@@ -60,12 +60,6 @@ int Interface::diceRoll()
 
 }
 
-Players *&Interface:: setupPlayer()
-{
-
-}
-
-
 
 Board *&Interface::setupBoard()
 {
@@ -93,9 +87,9 @@ Board *&Interface::setupBoard()
 
 Card &Interface::setupCard()
 {
-    char * card1 = "Safe";
-    char * card2 = "Death";
-    char * card3 = "Hot Dogs";
+    char * card1 = "Card1";
+    char * card2 = "Card2";
+    char * card3 = "Card3";
 
     fstream txt("card.txt");
     int a;
@@ -138,7 +132,7 @@ void Interface::gamePlay(Node * p1, Node * p2, Board * boardObj, Card cardObj)
         {
             cout << "Player One Turn" << endl;
             cout << endl;
-            turnMenu(p1, 0, play);
+            turnMenu(p1, 0, play, cardObj);
             current++;
         }
         else
@@ -158,7 +152,7 @@ void Interface::gamePlay(Node * p1, Node * p2, Board * boardObj, Card cardObj)
 
 }
 
-void Interface::turnMenu(Node *& temp, int player, Players & play)   
+void Interface::turnMenu(Node *& temp, int player, Players & play, Card & cardObj)   
 {
     play.displayPlayer(0);
     char option;
@@ -187,8 +181,11 @@ void Interface::turnMenu(Node *& temp, int player, Players & play)
                 temp->displayNode();
                 if(strcmp(temp->getInfo(),"Chance")==0)
                 {
+                    Bnode * temp;
                     cout << "You landed on Chance, time to draw a card" << endl;
-                    
+                    cout << "Drawing a card from the deck, you have just drawn : " << endl;
+                    cout << cardObj.getCard(temp) << endl;
+                    play.insert(0,1);
                 }
                 done = true;
                 break;
