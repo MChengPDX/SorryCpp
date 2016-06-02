@@ -73,7 +73,7 @@ class Board
         Node *& movement(Node *&current,int player, int move);
         Node*&setPlayers(Node *& temp);
         char * getInfo(Node * head);
-        
+        int checkWin(Node * temp); 
 
 };
 

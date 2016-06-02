@@ -19,7 +19,8 @@ class Interface
         void setPlayerOnBoard();
         void gameSetup();
         void gamePlay(Node * p1, Node * p2, Board * boardObj, Card obj);
-        void turnMenu(Node *& temp, int player, Players & play, Card & cardObj);
+        int turnMenu(Node *& temp, Node *& temp2, int player, Players & play, Card & cardObj);
+        int AIturnMenu(Node *&, Node *&, int, Players & play, Card &);
 
 };
 

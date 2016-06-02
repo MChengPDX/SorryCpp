@@ -24,7 +24,8 @@ void Interface::validationFunction()
     boardObj->displayAll();
     cout << "Searching for a occurance of a  specific type of board : Death " << endl << endl;
 
-    boardObj->searchFor("Death");
+    char death[] = "Death";
+    boardObj->searchFor(death);
 
     boardObj->removeAll();
     cout << "Displaying after remove all nodes of the board " << endl << endl;
@@ -65,10 +66,19 @@ Board *&Interface::setupBoard()
 {
     
     boardObj = new Board;
-    char * Safe = "Safe";
-    char * Death = "Death";
-    char * Chance = "Chance";
+    /*
+    char * Safe = new char[(strlen("Safe")+1)];
+    strcpy(Safe, "Safe");
+    
+    char * Death = new char[(strlen("Death")+1)];
+    strcpy(Death, "Death");
 
+    char * Chance = new char[(strlen("Chance")+1)];
+    strcpy(Chance, "Chance");
+*/
+    char Safe[5] = "Safe";
+    char Death[6] = "Death";
+    char Chance[7] = "Chance";
     fstream txt("board.txt");
     int a;
     while(txt >> a)
@@ -86,11 +96,17 @@ Board *&Interface::setupBoard()
 }
 
 Card &Interface::setupCard()
-{
-    char * card1 = "Card1";
-    char * card2 = "Card2";
-    char * card3 = "Card3";
-
+{/*
+    char * card1 = new char[(strlen("Card1")+1)];
+    strcpy(card1, "card1");
+    char * card2 = new char[(strlen("Card1")+1)];
+    strcpy(card2, "card2");
+    char * card3 = new char[(strlen("Card3")+1)];
+    strcpy(card3, "card3");
+*/
+    char card1[6] = "card1";
+    char card2[6] = "card2";
+    char card3[6] = "card3";
     fstream txt("card.txt");
     int a;
     while(txt >> a)
@@ -108,7 +124,6 @@ Card &Interface::setupCard()
 
 void Interface::gameSetup()
 {
-    boardObj = new Board;
     cardObj = setupCard();
     boardObj = setupBoard();
     Node * p1;
@@ -121,30 +136,34 @@ void Interface::gameSetup()
 
 void Interface::gamePlay(Node * p1, Node * p2, Board * boardObj, Card cardObj)
 {
+    int value;
     Players play(1);
-    play.insert(0, 1);
-    play.insert(0, 4);
     int current = 2;
     bool done = false;
     while(!done)
     {
         if(current % 2 == 0)
         {
+            cout << "--------------------------------" << endl;
             cout << "Player One Turn" << endl;
+            cout << "--------------------------------" << endl;
             cout << endl;
-            turnMenu(p1, 0, play, cardObj);
+            value = turnMenu(p1, p2, 0, play, cardObj);
+            cout << value << endl;
             current++;
         }
         else
-        { 
+        {
+            cout << "--------------------------------" << endl;
             cout << "Player Two Turn" << endl;
+            cout << "--------------------------------" << endl;
+            value = AIturnMenu(p2, p1, 1, play, cardObj);
             cout << endl;
+            
             current++;
         }
         char play;
-        cout << "Keep playing? (y/n)" << endl;
-        cin >> play;
-        if(play == 'n' || play == 'N')
+        if(value == 1)
         {
             done = true;
         }
@@ -152,14 +171,38 @@ void Interface::gamePlay(Node * p1, Node * p2, Board * boardObj, Card cardObj)
 
 }
 
-void Interface::turnMenu(Node *& temp, int player, Players & play, Card & cardObj)   
+int Interface::AIturnMenu(Node *& temp, Node *& temp2, int player, Players & play, Card & c)
 {
-    play.displayPlayer(0);
-    char option;
+    int check;
+    check = boardObj->checkWin(temp);
+    if(check == 1)
+    {
+        return 1;
+    }
+    cout << "Player 2 is current at : " << endl;
+    temp->displayNode();
+    int dice = diceRoll();
+    cout << "Player 2 has rolled a " << dice << endl;
+    cout << "Player 2 will now move " << dice << " spaces. "<< endl;
+    temp = boardObj->movement(temp, 1, dice);
+    cout << "Player 2 is now at " << endl;
+    temp->displayNode();
+    if(temp == temp2)
+    {
+        cout << "Player 2 is in the same spot as player 1, player 2 loses" << endl;
+        return 1;
+    }
+    else
+        return 0;
+}
 
+int Interface::turnMenu(Node *& temp, Node *& temp2, int player, Players & play, Card & cardObj)   
+{
+    char option;
     int dices = 0;
     cout << "Current position on the board is : " << endl;
     temp->displayNode();
+    cout << endl;
     bool done = false;
     while(!done)
     {
@@ -179,6 +222,7 @@ void Interface::turnMenu(Node *& temp, int player, Players & play, Card & cardOb
                 
                 cout << "You are now at " << endl;
                 temp->displayNode();
+                cout << endl;
                 if(strcmp(temp->getInfo(),"Chance")==0)
                 {
                     Bnode * temp;
@@ -187,7 +231,14 @@ void Interface::turnMenu(Node *& temp, int player, Players & play, Card & cardOb
                     cout << cardObj.getCard(temp) << endl;
                     play.insert(0,1);
                 }
-                done = true;
+                if(temp == temp2)
+                {
+                    cout << "Uh-oh, it looks like player 1 is in the same spot as player 2" << endl;
+                    cout << "Player 1 loses " << endl;
+                    return 1;
+                }
+                else
+                    return 0;
                 break;
             case 'B':
                 cout<< "Here are all things in your possesion " << endl;
@@ -196,12 +247,13 @@ void Interface::turnMenu(Node *& temp, int player, Players & play, Card & cardOb
             case 'C':
                 cout << "You have given up " << endl;
                 done = true;
+                return 1;
                 break;
             default:
                 cout << "Not a valid option " << endl;
                 break;
         }
 
-    }
 
+}
 }

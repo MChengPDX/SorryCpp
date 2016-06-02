@@ -126,6 +126,17 @@ Node *& Board::setPlayers(Node *& temp)
 
 }
 
+int Board::checkWin(Node * temp)
+{
+    if(temp->getNext() == NULL)
+    {
+        cout << "You Win! You reached then end and reached for the stars " << endl;
+        return 1;
+    }
+    else
+        return 0;
+}
+
 Node *&Board::movement(Node * &current, int player, int move)
 {
     for(int i = 0; i < move; i++)
